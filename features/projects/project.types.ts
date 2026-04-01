@@ -1,5 +1,6 @@
 import z from "zod";
 import { projectSchema } from "./schemas";
+import { ITechnology } from "../technology/technology.type";
 
 export type IProject = {
     id: number;
@@ -11,6 +12,8 @@ export type IProject = {
     featured: boolean;
     createdAt: string;
     updatedAt: string;
+    technologiesIds?: number[];
+    technologies?: ITechnology[]
 };
 
 export type ProjectFormData = z.infer<typeof projectSchema>;

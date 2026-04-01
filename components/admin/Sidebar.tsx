@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const links = [
   { name: "Proyectos", href: "/admin/projects" },
   { name: "Empresas", href: "/admin/companies" },
+  { name: "Tecnologías", href: "/admin/technology" },
   { name: "Web", href: "/" },
 ];
 

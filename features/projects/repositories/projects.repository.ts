@@ -24,6 +24,11 @@ export class ProjectRepository {
                 orderBy: { createdAt: "desc" },
                 include:{
                     company:true,
+                    technologies: {
+                        include:{
+                            technology: true
+                        }
+                    },
                 }
             });
 

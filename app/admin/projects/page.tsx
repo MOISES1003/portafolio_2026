@@ -5,11 +5,13 @@ import TitlePage from "@/components/admin/TitlePage";
 import { FooterModal } from "@/components/FooterModal";
 import Modal from "@/components/Modal";
 import ProjectForm from "@/features/projects/components/ProjectForm";
+import ProjectTechnologiesForm from "@/features/projects/components/ProjectTechnologiesForm";
 import { useDeleteProject, useInsertProject, useUpdatedProject } from "@/features/projects/hooks";
 import { IProject, ProjectFormData } from "@/features/projects/project.types";
+import { useQueryTechnology } from "@/features/technology/hooks";
 import { useCompaniesStore, useProjectStore } from "@/store";
 import { ColDef, ICellRendererParams } from "ag-grid-community";
-import { PencilLine, Plus, Trash2 } from "lucide-react";
+import { CodeXml, PencilLine, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 const initialValues: ProjectFormData = {
@@ -24,6 +26,7 @@ const initialValues: ProjectFormData = {
 export default function ProjectsPage() {
   const [currentProject, setCurrentProject] = useState<IProject | null>(null);
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [openModalTechnologies, setOpenModalTechnologies] = useState<boolean>(false)
 
   const { projects, isLoading } = useProjectStore();
   const { companies } = useCompaniesStore();
@@ -35,7 +38,7 @@ export default function ProjectsPage() {
     setOpenModal
   });
   const { handleDeleteProject } = useDeleteProject()
-
+  const { technologyData } = useQueryTechnology()
   const projectColumns: ColDef<IProject>[] = [
     {
       field: "title",
@@ -63,18 +66,25 @@ export default function ProjectsPage() {
     },
     {
       headerName: "Actions",
-      width: 100,
+      width: 150,
       pinned: "right",
       cellRenderer: (params: ICellRendererParams) => {
         const project: IProject = params.data;
         return (
-          <div className="flex items-center justify-center flex-wrap gap-2.5">
+          <div className="flex h-full w-full items-center justify-between flex-wrap gap-2.5">
             <button className="cursor-pointer" title={`Editar ${project.title}`}
               onClick={() => {
                 setCurrentProject(project);
                 setOpenModal(true)
               }}>
               <PencilLine />
+            </button>
+            <button className="cursor-pointer" title={`tecnologías de ${project.title}`}
+              onClick={() => {
+                setCurrentProject(project);
+                setOpenModalTechnologies(true)
+              }}>
+              <CodeXml />
             </button>
             <button className="cursor-pointer" title={`Eliminar ${project.title}`}
               onClick={() => {
@@ -146,6 +156,24 @@ export default function ProjectsPage() {
         onSubmitProject={onSubmitProject}
       />
     </Modal>
+
+    {
+      currentProject && (
+        <Modal
+          isOpen={openModalTechnologies}
+          onClose={() => setOpenModalTechnologies(false)}
+          title={`Tecnologías de ${currentProject.title}`}
+        >
+          <ProjectTechnologiesForm
+            projectId={currentProject.id}
+            technologies={technologyData}
+            onClose={() => setOpenModalTechnologies(false)}
+            tecnologiesByProject={currentProject.technologiesIds ?? []}
+          />
+        </Modal>
+      )
+    }
+
 
   </ContentPage >;
 }

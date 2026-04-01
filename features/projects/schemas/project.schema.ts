@@ -7,5 +7,5 @@ export const projectSchema = z.object({
   repoUrl: z.string().url("URL inválida").optional().or(z.literal("")),
   liveUrl: z.string().url("URL inválida").optional().or(z.literal("")),
   featured: z.boolean().optional(),
-});
+}); 
 

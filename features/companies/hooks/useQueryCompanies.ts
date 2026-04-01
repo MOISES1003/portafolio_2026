@@ -4,9 +4,6 @@ import { ICompanies } from "../companies.type";
 import { useCompaniesStore } from "@/store";
 import { useEffect } from "react";
 
-
-
-
 export const useQueryCompanies = () => {
 
     const { setCompanies, setIsLoading } = useCompaniesStore();

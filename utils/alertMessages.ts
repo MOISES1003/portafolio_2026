@@ -39,5 +39,19 @@ export const alertMessages = {
         loadingDelete: "Eliminando empresa...",
         successDelete: "Empresa Eliminada correctamente.",
         errorDelete: "Error al eliminar la empresa."
+    },
+        msTechnology: {
+        insert: "¿Estas seguro de insertar la tecnología?",
+        loading: "Insertando tecnología...",
+        success: "Tecnología insertada correctamente.",
+        error: "Error al insertar la tecnología.",
+        updated: "¿Estas seguro de actualizar la tecnología?",
+        loadingUpdated: "Actualizando tecnología...",
+        successUpdated: "Tecnología Actualizada correctamente.",
+        errorUpdated: "Error al actualizar la tecnología.",
+        delete: "¿Estas seguro de eliminar la tecnología?",
+        loadingDelete: "Eliminando tecnología...",
+        successDelete: "Tecnología Eliminada correctamente.",
+        errorDelete: "Error al eliminar la tecnología."
     }
 }
