@@ -6,12 +6,13 @@ import { FooterModal } from "@/components/FooterModal";
 import Modal from "@/components/Modal";
 import { CompanyFormData, ICompanies } from "@/features/companies/companies.type";
 import CompanyForm from "@/features/companies/components/CompanyForm";
-import { useInsertCompanies, useUpdatedProject } from "@/features/companies/hooks";
+import { useInsertCompanies, useUpdatedProject, useUploadImgCompanies } from "@/features/companies/hooks";
 import { useCompaniesStore } from "@/store";
 import { ColDef, ICellRendererParams } from "ag-grid-community";
-import { PencilLine, Plus } from "lucide-react";
+import { ImageUp, PencilLine, Plus } from "lucide-react";
 import { useState } from "react";
-
+import Image from "next/image";
+import CompanyLogoForm from "@/features/companies/components/CompanyLogoForm";
 const initialValues: CompanyFormData = {
   title: "",
   description: "",
@@ -19,16 +20,42 @@ const initialValues: CompanyFormData = {
 
 export default function CompaniesPage() {
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [openLogoModal, setOpenLogoModal] = useState<boolean>(false)
   const [currentCompany, setCurrentCompany] = useState<ICompanies | null>(null);
   const { companies, isLoading } = useCompaniesStore();
   const { handleInsertCompany, isLoadingInsert } = useInsertCompanies({ setOpenModal });
   const { handleUpdatedCompany, isLoadingUpdated } = useUpdatedProject({ setOpenModal });
+  const { handleUploadImgCompanies, isLoadingUpload } = useUploadImgCompanies({ setOpenModal: setOpenLogoModal });
+
   const companyColumns: ColDef<ICompanies>[] = [
     {
       field: "title",
       headerName: "Empresa",
       flex: 1,
       minWidth: 150
+    },
+    {
+      field: "imgUrl",
+      headerName: "Logo",
+      width: 100,
+      cellRenderer: (params: ICellRendererParams) => {
+        const logoUrl = params.value;
+        return logoUrl ? (
+          <div className="flex items-center justify-center w-full h-full">
+            <Image
+              src={logoUrl}
+              alt="Logo"
+              width={50}
+              height={50}
+              className="object-contain max-h-14"
+            />
+          </div>
+        ) : (
+          <div className="flex items-center justify-center w-full h-full text-gray-400">
+            Sin Logo
+          </div>
+        );
+      }
     },
     {
       field: "description",
@@ -43,7 +70,7 @@ export default function CompaniesPage() {
       cellRenderer: (params: ICellRendererParams) => {
         const company: ICompanies = params.data;
         return (
-          <div className="flex items-center justify-center flex-wrap gap-2.5">
+          <div className="flex h-full w-full items-center justify-center flex-wrap gap-2.5">
             <button className="cursor-pointer" title={`Editar ${company.title}`}
               onClick={() => {
                 setCurrentCompany(company);
@@ -51,7 +78,13 @@ export default function CompaniesPage() {
               }}>
               <PencilLine />
             </button>
-
+            <button className="cursor-pointer" title={`Subir Logo`}
+              onClick={() => {
+                setCurrentCompany(company);
+                setOpenLogoModal(true)
+              }}>
+              <ImageUp />
+            </button>
           </div>
         )
       }
@@ -69,6 +102,23 @@ export default function CompaniesPage() {
     }
 
   }
+
+
+  const onUploadComplete = async (file: File) => {
+    if (currentCompany) {
+
+      await handleUploadImgCompanies(
+        {
+          id: currentCompany.id,
+          data: {
+            title: currentCompany.title,
+            description: currentCompany.description,
+            imgUrl: currentCompany?.imgUrl || "",
+          },
+        }, file);
+    }
+  };
+
 
   return <ContentPage >
     <TitlePage title="Mantenimiento de Empresas" />
@@ -106,5 +156,21 @@ export default function CompaniesPage() {
       />
     </Modal>
 
+    {
+      currentCompany && (
+        <Modal
+          isOpen={openLogoModal}
+          onClose={() => setOpenLogoModal(false)}
+          title="Subir Logo"
+        >
+          <CompanyLogoForm
+            currentTechnology={currentCompany}
+            onClose={() => setOpenLogoModal(false)}
+            onUploadComplete={onUploadComplete}
+            loading={isLoadingUpload}
+          />
+        </Modal>
+      )
+    }
   </ContentPage>;
 }

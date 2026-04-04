@@ -47,6 +47,12 @@ export default function ProjectsPage() {
       minWidth: 150
     },
     {
+      field: "company.title",
+      headerName: "Empresa",
+      flex: 1,
+      minWidth: 150
+    },
+    {
       field: "description",
       headerName: "descripción",
       flex: 1,

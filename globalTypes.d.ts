@@ -1,3 +1,4 @@
+
 export interface GetsParams {
   search?: string;        // texto a buscar
 }

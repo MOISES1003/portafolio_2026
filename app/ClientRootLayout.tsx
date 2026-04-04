@@ -1,31 +1,32 @@
 "use client";
 
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "../components/Providers";
 import { useQueryCompanies } from "@/features/companies/hooks";
 import { useQueryProjects } from "@/features/projects/hooks";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "sonner";
+import Header from "@/components/Header";
+import { useTheme } from "@/hooks/useTheme";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 // Crear un QueryClient
 const queryClient = new QueryClient();
 
 export default function ClientRootLayout({ children }: { children: React.ReactNode }) {
-    // Ejecutar queries dentro del QueryClientProvider
+
+    const { theme, toggleTheme } = useTheme();
     return (
         <QueryClientProvider client={queryClient}>
-            <html lang="en">
-                <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                    <Providers>
-                        <InnerQueries>{children}</InnerQueries>
-                        <Toaster richColors position="top-right" />
-                    </Providers>
-                </body>
-            </html>
+            <Providers>
+                <InnerQueries>
+                    <Header theme={theme} toggleTheme={toggleTheme} />
+                    <main className="min-h-screen">
+                        {children}
+                    </main>
+                </InnerQueries>
+                <Toaster richColors position="top-right" />
+            </Providers>
         </QueryClientProvider>
     );
 }
