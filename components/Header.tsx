@@ -12,7 +12,7 @@ interface HeaderProps {
 
 export default function Header({ theme, toggleTheme }: HeaderProps) {
   return (
-    <header className="bg-header shadow-md fixed w-full z-10 max-h-16">
+    <header className="bg-header shadow-md fixed w-full z-10 h-16">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* Logo */}

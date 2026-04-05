@@ -1,3 +1,6 @@
 export * from "./admin"
 export * from "./Providers"
-export * from "./Modal" 
+export * from "./Modal"
+export * from "./home"
+export * from "./HeaderSection"
+export * from "./ContentSection"

@@ -20,10 +20,12 @@ export default function ClientRootLayout({ children }: { children: React.ReactNo
         <QueryClientProvider client={queryClient}>
             <Providers>
                 <InnerQueries>
-                    <Header theme={theme} toggleTheme={toggleTheme} />
-                    <main className="min-h-screen">
-                        {children}
-                    </main>
+                    <div className="flex flex-col min-h-screen"> 
+                        <Header theme={theme} toggleTheme={toggleTheme} />
+                        <main>
+                            {children}
+                        </main>
+                    </div>
                 </InnerQueries>
                 <Toaster richColors position="top-right" />
             </Providers>

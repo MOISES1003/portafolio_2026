@@ -1,8 +1,11 @@
+import { ProfileSection, ProyectosDestacadatos, StackTechnology } from "@/components";
 
 export default function Home() {
   return (
-    <div className="bg-background">
-
+    <div>
+      <ProfileSection />
+      <ProyectosDestacadatos />
+      <StackTechnology/>
     </div>
   );
 }

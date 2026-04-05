@@ -4,7 +4,8 @@
   --background: #131313;
   --headerColor: #0c0c0c;
   --primaryColorText: #22d2ec;
-  --secondaryColorText: #414040;
+  --secondaryColorText: #545454;
+  --thirdColorText: #889494;
   --text: #ffffff;
 }
 
@@ -19,16 +20,61 @@
   --color-background: var(--background);
   --color-primary: var(--primaryColorText);
   --color-secondary: var(--secondaryColorText);
+  --color-third: var(--thirdColorText);
   --color-header: var(--headerColor);
   --color-textbase: var(--text);
   --font-headline: var(--font-newsreader);
   --font-body: var(--font-space-grotesk);
   --font-label: var(--font-space-grotesk);
-  --font-sans: var(--font-space-grotesk);  
+  --font-sans: var(--font-space-grotesk);
 }
 
 body {
   background: var(--background);
-  font-family: var(--font-space-grotesk), Arial, sans-serif;  
+  font-family: var(--font-space-grotesk), Arial, sans-serif;
   color: var(--text);
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide {
+  animation: fadeSlideUp 0.6s ease forwards;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: "_";
+  animation: blink 1s step-end infinite;
+  color: var(--primaryColorText);
 }
