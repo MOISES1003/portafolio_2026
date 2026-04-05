@@ -28,7 +28,7 @@ export function StackTechnology() {
 
   return (
     <ContentSection>
-      <HeaderSection label="Stack de Tecnologías" />
+      <HeaderSection label="Stack Tecnológico" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 

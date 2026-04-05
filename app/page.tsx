@@ -1,4 +1,4 @@
-import { ProfileSection, ProyectosDestacadatos, StackTechnology } from "@/components";
+import { ContactMe, ProfileSection, ProyectosDestacadatos, StackTechnology } from "@/components";
 
 export default function Home() {
   return (
@@ -6,6 +6,7 @@ export default function Home() {
       <ProfileSection />
       <ProyectosDestacadatos />
       <StackTechnology/>
+      <ContactMe/>
     </div>
   );
 }

@@ -7,21 +7,20 @@ import { useQueryProjects } from "@/features/projects/hooks";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "sonner";
 import Header from "@/components/Header";
-import { useTheme } from "@/hooks/useTheme";
-
+import { GridBackground } from "@/components";
 
 // Crear un QueryClient
 const queryClient = new QueryClient();
 
 export default function ClientRootLayout({ children }: { children: React.ReactNode }) {
 
-    const { theme, toggleTheme } = useTheme();
     return (
         <QueryClientProvider client={queryClient}>
             <Providers>
                 <InnerQueries>
-                    <div className="flex flex-col min-h-screen"> 
-                        <Header theme={theme} toggleTheme={toggleTheme} />
+                    <div className="flex flex-col min-h-screen">
+                        <GridBackground />
+                        <Header />
                         <main>
                             {children}
                         </main>
