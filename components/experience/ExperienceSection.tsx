@@ -5,6 +5,7 @@ import { ITechnology } from "@/features/technology/technology.type";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import Image from "next/image";
 import { IProject } from "@/features/projects/project.types";
+import { useProjectStore } from "@/store";
 
 type CompanyGroup = {
     company: IProject["company"];
@@ -13,9 +14,6 @@ type CompanyGroup = {
 
 type GroupedProjects = Record<string, CompanyGroup>;
 
-interface ExperienceSectionProps {
-    projects: IProject[];
-}
 
 function CompanyBlock({ group }: { group: CompanyGroup }) {
     return (
@@ -28,11 +26,14 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
                 {group.company?.imgUrl ? (
                     <div className="flex w-full items-center justify-between">
                         <Image
-                            src={group.company.imgUrl}
-                            alt={group.company.title}
-                            width={60}
                             height={60}
+                            width={60}
+                            src={group.company?.imgUrl || ""}
+                            alt={group.company?.title || "Company Logo"}
+                            unoptimized
+                            loading="lazy"
                         />
+
                         <span className="text-[0.7rem] text-secondary tracking-widest uppercase">
                             {group.projects.length} proyecto(s)
                         </span>
@@ -154,8 +155,8 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
     );
 }
 
-export function ExperienceSection({ projects }: ExperienceSectionProps) {
-
+export function ExperienceSection() {
+    const { projects } = useProjectStore();
     const grouped = projects.reduce<GroupedProjects>((acc, project) => {
         const key = project.company?.title || "Otros";
 
@@ -179,6 +180,7 @@ export function ExperienceSection({ projects }: ExperienceSectionProps) {
 
     return (
         <ContentSection className="flex flex-col gap-12">
+
             {/* EMPRESAS */}
             <div className="flex flex-col gap-16">
                 {sortedGroups.map((group, idx) => (

@@ -1,9 +1,7 @@
-"use client";
 import { ContentSection, ExperienceSection } from "@/components";
-import { useProjectStore } from "@/store";
 
 export default function ExperiencePage() {
-    const { projects } = useProjectStore();
+
 
     return (
         <ContentSection>
@@ -20,7 +18,7 @@ export default function ExperiencePage() {
                     refleja mi pasión por el desarrollo de software y la creación de soluciones innovadoras.
                 </p>
             </div>
-            <ExperienceSection projects={projects} />
+            <ExperienceSection />
         </ContentSection>
 
     )
