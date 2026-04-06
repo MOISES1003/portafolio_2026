@@ -1,4 +1,4 @@
-import { FaGithub, FaGlobe, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { ContentSection } from "../ContentSection";
 import { SocialLinks } from "./SocialLinks";
 
@@ -6,7 +6,7 @@ export function ProfileSection() {
     return (
         <ContentSection className="flex items-center">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center justify-center">
-                
+
                 {/* Columna izquierda */}
                 <div className="flex flex-col gap-4">
                     <div className="flex gap-2 items-center opacity-75 animate-fade-slide delay-100">
@@ -26,7 +26,7 @@ export function ProfileSection() {
                             items={[
                                 { icon: <FaGithub />, href: "https://github.com/MOISES1003", label: "GitHub" },
                                 { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/moises-saucedo-ambicho-813316174", label: "LinkedIn" },
-                                { icon: <FaGlobe />, href: "https://msa-cod117.vercel.app/", label: "Portfolio" },
+                                { icon: <FaWhatsapp />, href: "https://msa-cod117.vercel.app/", label: "Whatsapp" },
                             ]}
                         />
                     </div>
