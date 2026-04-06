@@ -4,7 +4,12 @@ import { ICompanies } from "../companies.type";
 import { useCompaniesStore } from "@/store";
 import { useEffect } from "react";
 
-export const useQueryCompanies = () => {
+interface useQueryCompaniesResult {
+    isLoading: boolean;
+}
+
+
+export const useQueryCompanies = (): useQueryCompaniesResult => {
 
     const { setCompanies, setIsLoading } = useCompaniesStore();
 
@@ -26,4 +31,7 @@ export const useQueryCompanies = () => {
         setIsLoading(isLoading);
     }, [isLoading, setIsLoading]);
 
+    return {
+        isLoading
+    }
 };

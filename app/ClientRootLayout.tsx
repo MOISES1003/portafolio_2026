@@ -9,6 +9,7 @@ import { Toaster } from "sonner";
 import Header from "@/components/Header";
 import { GridBackground } from "@/components";
 import { TimeMachineButton } from "@/components/TimeMachineButton";
+import SplashLoader from "./SplashLoader";
 
 // Crear un QueryClient
 const queryClient = new QueryClient();
@@ -36,7 +37,18 @@ export default function ClientRootLayout({ children }: { children: React.ReactNo
 
 // Componente interno para usar tus hooks
 function InnerQueries({ children }: { children: React.ReactNode }) {
-    useQueryProjects();
-    useQueryCompanies();
-    return <>{children}</>;
+    const { isLoading } = useQueryProjects();
+    const { isLoading: isLoadingCompany } = useQueryCompanies();
+    const loading = isLoading || isLoadingCompany;
+
+    return (
+        <>
+            <SplashLoader
+                logoSrc="/logo.webp"
+                logoAlt="MSA Cod 117"
+                isLoading={loading}
+            />
+            {!loading && children}
+        </>
+    );
 }

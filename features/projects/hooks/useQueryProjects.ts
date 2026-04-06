@@ -5,8 +5,11 @@ import { useProjectStore } from "@/store";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
+interface useQueryProjectsResult {
+    isLoading: boolean;
+}
 
-export const useQueryProjects = () => {
+export const useQueryProjects = (): useQueryProjectsResult => {
 
     const { setProjects, setIsLoading } = useProjectStore();
 
@@ -27,4 +30,7 @@ export const useQueryProjects = () => {
     useEffect(() => {
         setIsLoading(isLoading);
     }, [isLoading, setIsLoading]);
+    return {
+        isLoading
+    }
 };
