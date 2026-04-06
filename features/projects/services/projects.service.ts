@@ -5,15 +5,14 @@ import { GetsParams } from "@/globalTypes";
 const repository = new ProjectRepository();
 
 export async function getProjects(params: GetsParams): Promise<IProject[]> {
-
     const projects = await repository.findProjects(params);
 
-    const projectsWithTech: IProject[] = projects.map(project => ({
+    return projects.map(project => ({
         id: project.id,
         title: project.title,
         description: project.description,
         companyId: project.companyId,
-        repoUrl: project.repoUrl ?? "", // si Prisma devuelve null, ponemos ""
+        repoUrl: project.repoUrl ?? "", // normalizamos null a string vacío
         liveUrl: project.liveUrl ?? "",
         featured: project.featured,
         createdAt: project.createdAt,
@@ -23,26 +22,21 @@ export async function getProjects(params: GetsParams): Promise<IProject[]> {
                 id: project.company.id,
                 title: project.company.title,
                 description: project.company.description,
-                imgUrl: project.company.imgUrl ?? undefined,
+                imgUrl: project.company.imgUrl ?? undefined, // null → undefined
                 createdAt: project.company.createdAt,
                 updatedAt: project.company.updatedAt,
             }
             : undefined,
         technologiesIds: project.technologies?.map(pt => pt.technologyId) ?? [],
-        technologies: project.technologies?.map(pt => {
-            const tech = pt.technology; // porque Prisma devuelve { technology: { ... } }
-            return {
-                id: tech.id,
-                name: tech.name,
-                nomenclature: tech.nomenclature ?? undefined,
-                logoUrl: tech.logoUrl ?? undefined,
-                createdAt: tech.createdAt,
-                updatedAt: tech.updatedAt,
-            };
-        }) ?? [],
+        technologies: project.technologies?.map(pt => ({
+            id: pt.technology.id,
+            name: pt.technology.name,
+            nomenclature: pt.technology.nomenclature ?? undefined,
+            logoUrl: pt.technology.logoUrl ?? undefined,
+            createdAt: pt.technology.createdAt,
+            updatedAt: pt.technology.updatedAt,
+        })) ?? [],
     }));
-
-    return projectsWithTech;
 }
 export async function createProject(data: ProjectFormData) {
     // Lógica adicional: valor por defecto para featured
