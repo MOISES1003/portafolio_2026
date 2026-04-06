@@ -9,7 +9,7 @@ export function ContactMe() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                 {/* Columna izquierda */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 animate-fade-slide delay-200">
 
                     <h2 className="text-5xl font-headline leading-tight text-textbase animate-fade-slide delay-200">
                         ¿Tienes un{" "}

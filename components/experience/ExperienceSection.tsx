@@ -19,10 +19,8 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-8">
 
-            {/* IZQUIERDA → EMPRESA */}
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 animate-fade-slide delay-200">
 
-                {/* Logo */}
                 {group.company?.imgUrl ? (
                     <div className="flex w-full items-center justify-between">
                         <Image
@@ -45,17 +43,14 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
                     </div>
                 )}
 
-                {/* Nombre */}
                 <h3 className="font-cinzel text-xl italic">
                     {group.company?.title || "Experiencia independiente"}
                 </h3>
 
-                {/* Rol (puedes hacerlo dinámico luego) */}
                 <span className="text-xs text-primary tracking-widest uppercase">
                     Full Stack Developer
                 </span>
 
-                {/* Descripción empresa */}
                 {group.company?.description && (
                     <p className="text-secondary text-[12px] leading-relaxed">
                         {group.company.description}
@@ -78,7 +73,7 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
              border border-secondary/30
              hover:border-primary/50
              transition-all duration-300
-             group overflow-hidden"
+             group overflow-hidden animate-fade-slide delay-200"
                         >
 
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 
@@ -90,7 +85,6 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
                                 <div className="flex-1 h-px bg-linear-to-r from-transparent via-secondary to-transparent" />
                             </div>
 
-                            {/* Header */}
                             <div className="flex justify-between items-start mb-2">
                                 <h4 className="font-cinzel text-lg">
                                     {project.title}
@@ -103,12 +97,10 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
                                 )}
                             </div>
 
-                            {/* Descripción */}
                             <p className="text-secondary text-sm mb-3">
                                 {project.description}
                             </p>
 
-                            {/* Tecnologías */}
                             {(project.technologies && project.technologies?.length > 0) && (
                                 <div className="flex flex-wrap gap-2 mb-3">
                                     {project.technologies.map((tech: ITechnology) => (
@@ -122,7 +114,6 @@ function CompanyBlock({ group }: { group: CompanyGroup }) {
                                 </div>
                             )}
 
-                            {/* Links */}
                             <div className="flex gap-4">
                                 {project.repoUrl && (
                                     <a
@@ -181,7 +172,6 @@ export function ExperienceSection() {
     return (
         <ContentSection className="flex flex-col gap-12">
 
-            {/* EMPRESAS */}
             <div className="flex flex-col gap-16">
                 {sortedGroups.map((group, idx) => (
                     <CompanyBlock key={idx} group={group} />

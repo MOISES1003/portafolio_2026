@@ -8,7 +8,7 @@ interface ProjectCardProps {
 export function ProjectCardTop({ project }: ProjectCardProps) {
 
     return (
-        <div className="relative group border border-white/10 hover:bg-white/5 p-6 flex flex-col gap-6 hover:border-primary/40 transition-all duration-300 ease-in-out cursor-pointer opacity-70 hover:opacity-100">
+        <div className="relative group border border-white/10 hover:bg-white/5 p-6 flex flex-col gap-6 hover:border-primary/40 transition-all duration-300 ease-in-out cursor-pointer opacity-70 hover:opacity-100 animate-fade-slide delay-200">
 
             {/* Esquinas decorativas */}
             <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-primary/60" />

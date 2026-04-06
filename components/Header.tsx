@@ -34,7 +34,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`text-xs sm:text-sm tracking-widest transition-colors ${
+                className={`text-xs sm:text-sm transition-colors ${
                   isActive
                     ? "text-primary border-b-2 border-primary pb-0.5"
                     : "text-secondary hover:text-primary"

@@ -37,22 +37,22 @@ export function StackTechnology() {
           <TechBubbles techs={filteredTechs} />
         </div>}
         {/* Derecha — descripción */}
-        <div className="lg:order-2 order-1 flex flex-col gap-6 px-4 lg:px-8">
-          <div className="flex gap-2 items-center opacity-75">
+        <div className="lg:order-2 order-1 flex flex-col gap-6 px-4 lg:px-8 ">
+          <div className="flex gap-2 items-center opacity-75 animate-fade-slide delay-200">
             <span className="w-12 h-[0.5px] border-[0.5px] border-primary block" />
             <p className="text-primary text-xl tracking-widest font-mono">
               Tecnologías que impulsan cada proyecto
             </p>
           </div>
 
-          <p className="text-secondary font-body text-sm leading-relaxed">
+          <p className="text-secondary font-body text-sm leading-relaxed animate-fade-slide delay-200">
             Cada tecnología en este stack fue elegida por su capacidad
             para resolver problemas reales. Desde interfaces reactivas
             hasta arquitecturas backend robustas, el objetivo siempre
             es el mismo: rendimiento, escalabilidad y mantenibilidad.
           </p>
 
-          <div className="flex flex-wrap gap-2 mt-2">
+          <div className="flex flex-wrap gap-2 mt-2 animate-fade-slide delay-200">
             {filteredTechs.map((tech) => (
               <span
                 key={tech.id}
@@ -63,7 +63,7 @@ export function StackTechnology() {
             ))}
           </div>
 
-          <p className="text-secondary/60 font-mono text-xs tracking-widest mt-2">
+          <p className="text-secondary/60 font-mono text-xs tracking-widest mt-2 animate-fade-slide delay-200">
             {filteredTechs.length}+ TECNOLOGÍAS EN STACK ACTIVO
           </p>
         </div>

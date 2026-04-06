@@ -21,7 +21,7 @@ export function ProfileSection() {
                             </span>
                         </span>
                     </h1>
-                    <div>
+                    <div className="animate-fade-slide delay-200">
                         <SocialLinks
                             items={[
                                 { icon: <FaGithub />, href: "https://github.com/MOISES1003", label: "GitHub" },

@@ -182,7 +182,7 @@ export function TechBubbles({ techs }: TechBubblesProps) {
 
     return (
         <div ref={containerRef} className="relative w-full h-full min-h-127.5 overflow-hidden">
-            <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }} />
+            <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none animate-fade-slide delay-200" style={{ zIndex: 0 }} />
 
             {techs.map((tech, i) => {
                 const b = bubbles[i];
@@ -196,7 +196,7 @@ export function TechBubbles({ techs }: TechBubblesProps) {
                 return (
                     <div
                         key={tech.name}
-                        className="absolute rounded-full flex flex-col items-center justify-center cursor-pointer hover:brightness-125 transition-all duration-300"
+                        className="absolute rounded-full flex flex-col items-center justify-center cursor-pointer hover:brightness-125 transition-all duration-300 animate-fade-slide delay-100"
                         style={{
                             width: size, height: size,
                             left: x - size / 2, top: y - size / 2,

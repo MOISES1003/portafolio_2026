@@ -10,7 +10,7 @@ export function ProyectosDestacadatos() {
     return (
         <ContentSection className="flex flex-col gap-10">
             <HeaderSection label="Proyectos Destacados" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                 {projects.filter((p) => p.featured).map((p) => (
                     <ProjectCardTop key={p.id} project={p} />
                 ))}
