@@ -1,4 +1,4 @@
-import { IProject, ProjectFormData } from "@/features/projects/project.types";
+import { IProject, PrismaProject, ProjectFormData } from "@/features/projects/project.types";
 import { ProjectRepository } from "../repositories";
 import { GetsParams } from "@/globalTypes";
 
@@ -6,15 +6,14 @@ const repository = new ProjectRepository();
 
 export async function getProjects(params: GetsParams): Promise<IProject[]> {
 
-    const projects: Awaited<ReturnType<typeof repository.findProjects>> =
-        await repository.findProjects(params);
+    const projects = await repository.findProjects(params);
 
-    const projectsWithTech: IProject[] = projects.map(project => ({
+    const projectsWithTech: IProject[] = projects.map((project: PrismaProject) => ({
         id: project.id,
         title: project.title,
         description: project.description,
         companyId: project.companyId,
-        repoUrl: project.repoUrl ?? "", // si Prisma devuelve null, ponemos ""
+        repoUrl: project.repoUrl ?? "",
         liveUrl: project.liveUrl ?? "",
         featured: project.featured,
         createdAt: project.createdAt,
@@ -31,7 +30,7 @@ export async function getProjects(params: GetsParams): Promise<IProject[]> {
             : undefined,
         technologiesIds: project.technologies?.map(pt => pt.technologyId) ?? [],
         technologies: project.technologies?.map(pt => {
-            const tech = pt.technology; // porque Prisma devuelve { technology: { ... } }
+            const tech = pt.technology;
             return {
                 id: tech.id,
                 name: tech.name,
