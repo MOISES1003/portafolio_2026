@@ -26,7 +26,7 @@ export function ProfileSection() {
                             items={[
                                 { icon: <FaGithub />, href: "https://github.com/MOISES1003", label: "GitHub" },
                                 { icon: <FaLinkedin />, href: "https://www.linkedin.com/in/moises-saucedo-ambicho-813316174", label: "LinkedIn" },
-                                { icon: <FaWhatsapp />, href: "https://msa-cod117.vercel.app/", label: "Whatsapp" },
+                                { icon: <FaWhatsapp />, href: "https://wa.me/51982432575", label: "Whatsapp" },
                             ]}
                         />
                     </div>
