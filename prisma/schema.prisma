@@ -5,9 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
-   binaryTargets   = ["native", "rhel-openssl-3.0.x"]
+  provider      = "prisma-client-js"
+  // output        = "../lib/generated/prisma"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
@@ -27,8 +27,8 @@ model Project {
   company      Company             @relation(fields: [companyId], references: [id])
   technologies ProjectTechnology[] @relation("ProjectToProjectTechnology")
 
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Company {
@@ -44,22 +44,22 @@ model Company {
 }
 
 model Technology {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
   nomenclature String?
-  logoUrl   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  logoUrl      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  projects  ProjectTechnology[] @relation("TechnologyToProjectTechnology")
+  projects ProjectTechnology[] @relation("TechnologyToProjectTechnology")
 }
 
 model ProjectTechnology {
   projectId    Int
   technologyId Int
 
-  project      Project    @relation("ProjectToProjectTechnology", fields: [projectId], references: [id])
-  technology   Technology @relation("TechnologyToProjectTechnology", fields: [technologyId], references: [id])
+  project    Project    @relation("ProjectToProjectTechnology", fields: [projectId], references: [id])
+  technology Technology @relation("TechnologyToProjectTechnology", fields: [technologyId], references: [id])
 
   @@id([projectId, technologyId])
 }

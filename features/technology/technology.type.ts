@@ -6,8 +6,8 @@ export type ITechnology = {
     name: string;
     nomenclature?: string;
     logoUrl?: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export type TechnologyFormData = z.infer<typeof technologySchema>;

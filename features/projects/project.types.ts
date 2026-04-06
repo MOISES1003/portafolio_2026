@@ -12,8 +12,8 @@ export type IProject = {
     repoUrl: string;
     liveUrl: string;
     featured: boolean;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     technologiesIds?: number[];
     technologies?: ITechnology[]
 };

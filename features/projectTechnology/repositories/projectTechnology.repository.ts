@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { normalizeError } from "@/utils/erros";
+import { Prisma } from "@prisma/client";
 
 export class ProjectTechnologyRepository {
 
@@ -14,7 +15,7 @@ export class ProjectTechnologyRepository {
     // Crear o reemplazar tecnologías de un proyecto dentro de una transacción
     async replaceProjectTechnologies(projectId: number, technologyIds: number[]) {
         try {
-            return await prisma.$transaction(async (tx) => {
+            return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
                 //  Eliminar todas las relaciones existentes
                 await tx.projectTechnology.deleteMany({
                     where: { projectId },
@@ -29,7 +30,7 @@ export class ProjectTechnologyRepository {
 
                 return await tx.projectTechnology.createMany({
                     data,
-                    skipDuplicates: true, 
+                    skipDuplicates: true,
                 });
             });
         } catch (error) {

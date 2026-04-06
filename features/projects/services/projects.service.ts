@@ -9,32 +9,37 @@ export async function getProjects(params: GetsParams): Promise<IProject[]> {
     const projects = await repository.findProjects(params);
 
     const projectsWithTech: IProject[] = projects.map(project => ({
-        ...project,
-        // Convertimos fechas a string
-        createdAt: project.createdAt.toISOString(),
-        updatedAt: project.updatedAt.toISOString(),
-        repoUrl: project.repoUrl ?? "",
+        id: project.id,
+        title: project.title,
+        description: project.description,
+        companyId: project.companyId,
+        repoUrl: project.repoUrl ?? "", // si Prisma devuelve null, ponemos ""
         liveUrl: project.liveUrl ?? "",
-        // Company: convertir fechas también
-        company: {
-            ...project.company,
-            createdAt: project.company.createdAt.toISOString(),
-            updatedAt: project.company.updatedAt.toISOString(),
-            imgUrl: project.company.imgUrl ?? undefined
-        },
-        // Tecnologías
-        technologiesIds: project.technologies.map(pt => pt.technologyId),
-        technologies: project.technologies.map(pt => {
-            const tech = pt.technology;
+        featured: project.featured,
+        createdAt: project.createdAt,
+        updatedAt: project.updatedAt,
+        company: project.company
+            ? {
+                id: project.company.id,
+                title: project.company.title,
+                description: project.company.description,
+                imgUrl: project.company.imgUrl ?? undefined,
+                createdAt: project.company.createdAt,
+                updatedAt: project.company.updatedAt,
+            }
+            : undefined,
+        technologiesIds: project.technologies?.map(pt => pt.technologyId) ?? [],
+        technologies: project.technologies?.map(pt => {
+            const tech = pt.technology; // porque Prisma devuelve { technology: { ... } }
             return {
                 id: tech.id,
                 name: tech.name,
                 nomenclature: tech.nomenclature ?? undefined,
                 logoUrl: tech.logoUrl ?? undefined,
-                createdAt: tech.createdAt.toISOString(),
-                updatedAt: tech.updatedAt.toISOString(),
+                createdAt: tech.createdAt,
+                updatedAt: tech.updatedAt,
             };
-        }),
+        }) ?? [],
     }));
 
     return projectsWithTech;

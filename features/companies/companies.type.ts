@@ -7,8 +7,8 @@ export type ICompanies = {
     title: string;
     description: string;
     imgUrl: string | null | undefined;
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
     projects?: IProject[]
 };
 
