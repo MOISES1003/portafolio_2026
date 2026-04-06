@@ -11,7 +11,7 @@ function useIsLargeScreen() {
   const [isLarge, setIsLarge] = useState(false);
 
   useEffect(() => {
-    const checkSize = () => setIsLarge(window.innerWidth >= 1024);
+    const checkSize = () => setIsLarge(window.innerWidth >= 700);
     checkSize();
     window.addEventListener("resize", checkSize);
     return () => window.removeEventListener("resize", checkSize);
@@ -33,10 +33,11 @@ export function StackTechnology() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
         {/* Solo se monta en pantallas grandes */}
-        {isLargeScreen && <TechBubbles techs={filteredTechs} />}
-
+        {isLargeScreen && <div className="lg:order-1 order-2 w-full">
+          <TechBubbles techs={filteredTechs} />
+        </div>}
         {/* Derecha — descripción */}
-        <div className="flex flex-col gap-6 px-4 lg:px-8">
+        <div className="lg:order-2 order-1 flex flex-col gap-6 px-4 lg:px-8">
           <div className="flex gap-2 items-center opacity-75">
             <span className="w-12 h-[0.5px] border-[0.5px] border-primary block" />
             <p className="text-primary text-xl tracking-widest font-mono">
@@ -51,7 +52,6 @@ export function StackTechnology() {
             es el mismo: rendimiento, escalabilidad y mantenibilidad.
           </p>
 
-          {/* Tags de tecnologías */}
           <div className="flex flex-wrap gap-2 mt-2">
             {filteredTechs.map((tech) => (
               <span
@@ -67,8 +67,7 @@ export function StackTechnology() {
             {filteredTechs.length}+ TECNOLOGÍAS EN STACK ACTIVO
           </p>
         </div>
-
       </div>
-    </ContentSection>
+    </ContentSection >
   );
 }
