@@ -6,7 +6,7 @@ export type ICompanies = {
     id: number;
     title: string;
     description: string;
-    imgUrl?: string;
+    imgUrl: string | null | undefined;
     createdAt: string;
     updatedAt: string;
     projects?: IProject[]

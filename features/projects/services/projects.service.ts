@@ -20,6 +20,7 @@ export async function getProjects(params: GetsParams): Promise<IProject[]> {
             ...project.company,
             createdAt: project.company.createdAt.toISOString(),
             updatedAt: project.company.updatedAt.toISOString(),
+            imgUrl: project.company.imgUrl ?? undefined
         },
         // Tecnologías
         technologiesIds: project.technologies.map(pt => pt.technologyId),
