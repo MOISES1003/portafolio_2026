@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ContentSection } from "../ContentSection";
 
 export function ContactMe() {
@@ -43,16 +44,14 @@ export function ContactMe() {
                         y siempre busco aportar soluciones eficientes y escalables.
                     </p>
 
-                    {/* Botón principal */}
-                    <a
+                    <Link
                         href="/contact"
                         className="relative w-fit px-6 py-3 border border-primary/30 text-primary font-mono tracking-widest text-sm overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-[0_0_20px_rgba(34,210,236,0.25)]"
                     >
                         <span className="relative z-10">Escríbeme</span>
 
-                        {/* efecto hover */}
                         <span className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                    </a>
+                    </Link>
 
                     {/* Alternativa contacto rápido */}
                     <div className="flex flex-col gap-2 text-base text-secondary/60 font-mono">
