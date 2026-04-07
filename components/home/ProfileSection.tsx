@@ -35,7 +35,7 @@ export function ProfileSection() {
                 {/* Columna derecha */}
                 <div className="flex flex-col gap-4 text-secondary font-body text-sm sm:text-base leading-relaxed animate-fade-slide delay-300">
                     <p>
-                        Soy un apasionado desarrollador de software con experiencia en la creación
+                        Soy un apasionado ingeniero de software con experiencia en la creación
                         de aplicaciones web y desktop. Me especializo en tecnologías como React,
                         Node.js, .Net Core y Laravel, y siempre estoy buscando aprender nuevas herramientas
                         y técnicas para mejorar mis habilidades.
