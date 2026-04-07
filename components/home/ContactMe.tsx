@@ -45,7 +45,7 @@ export function ContactMe() {
 
                     {/* Botón principal */}
                     <a
-                        href="/contacto"
+                        href="/contact"
                         className="relative w-fit px-6 py-3 border border-primary/30 text-primary font-mono tracking-widest text-sm overflow-hidden group transition-all duration-300 hover:border-primary hover:shadow-[0_0_20px_rgba(34,210,236,0.25)]"
                     >
                         <span className="relative z-10">Escríbeme</span>
